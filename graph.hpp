@@ -2,10 +2,18 @@
 #define GRAPH_HPP
 
 #define vertice int
+#define INF 0x3f3f3f3f
 
 #include <vector>
+#include <queue>
+
 
 class Grafo {
+	private:
+		int _numVertices;
+		int _numArestas;
+		std::vector<std::vector<int>> _conexao;
+
 	public:
 		/**
 		 * @brief Constrói um novo objeto Grafo
@@ -61,15 +69,19 @@ class Grafo {
 		 */
 		int getPesoAresta(vertice v1, vertice v2) const;
 
+		/**
+		 * @brief Imprime o grafo por meio da lista de adjacencia de cada vertice
+		 * 
+		 */
 		void imprimir() const;
 
+		/**
+		 * @brief Imprime os pesos entre cada aresta do grafo.
+		 * 
+		 */
 		void imprimirPesos() const;
 
-
-	private:
-		int _numVertices;
-		int _numArestas;
-		std::vector<std::vector<int>> _conexao;
+		int dijkstra(vertice origem, vertice destino);
 };
 
 

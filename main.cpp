@@ -1,10 +1,10 @@
 #include <iostream>
 #include "graph.hpp"
 
-#define INF 0x3f3f3f3f
-
 
 using namespace std;
+
+
 
 int main(int argc, char const *argv[]) {
 	int numeroDeCidades{0};
@@ -17,9 +17,8 @@ int main(int argc, char const *argv[]) {
 		G->adicionaAresta(identificadorV1 - 1, identificadorV2 - 1, peso);
 	}
 
-	G->imprimir();
-	G->imprimirPesos();
-
+	int menorDistancia = G->dijkstra(0, numeroDeCidades-1);
+	cout<<menorDistancia<<endl;
 
 
     return 0;
