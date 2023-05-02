@@ -8,7 +8,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/tp01",
-		"args": ["<test_cases/inputs/test_case1.txt"],
+		"args": ["<test_cases/inputs/test_case4.txt"],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",
 		"environment": [],

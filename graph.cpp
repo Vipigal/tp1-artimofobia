@@ -64,6 +64,8 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 
 	vector<int> dist(totalVertices, INF); //Vetor que armazena as distancias dos vertices
 	vector<bool> visitados(totalVertices, false); //Vetor que armazena quais vertices ja foram visitados
+	vector<int> paridade(totalVertices, 0); //caminho par = 1; caminho impar = -1;
+	vector<int> prev(totalVertices, -1); //Vetor que marca o caminho percorrido ate certo vertice
 
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> filaPrioridade; //Fila de prioridades com o menor elemento no topo
 
@@ -80,9 +82,33 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 			
 			for(int i=0; i<totalVertices; i++){
 				if(_conexao[v][i] != -1){
+					if(i == destino && paridade[v] == 1){
+						dist[v] = INF;
+						visitados[v] = false;
+						// filaPrioridade.push(make_pair(dist[origem], origem));
+						continue;
+					}
+
 					int alt = dist[v] + _conexao[v][i];
 					if(alt < dist[i]){
 						dist[i] = alt;
+						prev[i] = v;
+
+						int paridadeNova;
+						if(paridade[v] == 0 || paridade[v] == 1){
+							paridadeNova = -1;
+						}
+						else{
+							paridadeNova = 1;
+						}
+
+						if(i == destino && paridadeNova == -1){
+							dist[i] = INF;
+							break;
+						}
+						paridade[i] = paridadeNova;
+
+						// prev[i] = v;
 						filaPrioridade.push(make_pair(dist[i], i));
 					}
 				}
@@ -90,10 +116,19 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 		}
 	}
 
-	// for(auto i : dist){
+	// vector<int> path;
+	// for (int v = destino + 1; v != -1; v = prev[v]) {
+	// 	path.push_back(v);
+	// }
+
+	if(paridade[destino] == -1)
+		return -1;
+
+	// for(auto i : paridade){
 	// 	std::cout<<i<<std::endl;
 	// }
 
 	return (dist[destino] != INF) ? dist[destino] : -1;
 
 }
+

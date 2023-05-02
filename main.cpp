@@ -14,6 +14,8 @@ int main(int argc, char const *argv[]) {
 
 	int identificadorV1, identificadorV2, peso;
 	while(cin>>identificadorV1>>identificadorV2>>peso){
+		if(peso % 2 != 0)
+			continue;
 		G->adicionaAresta(identificadorV1 - 1, identificadorV2 - 1, peso);
 	}
 
