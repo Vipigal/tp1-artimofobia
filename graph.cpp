@@ -79,10 +79,11 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 			visitados[v] = true;
 			
 			for(int i=0; i<totalVertices; i++){
-				if(_conexao[v][i] != -1){
-					int alt = dist[v] + _conexao[v][i];
-					if(alt < dist[i]){
-						dist[i] = alt;
+				int pesoAtual = getPesoAresta(v, i);
+				if(pesoAtual != -1){
+					int distNova = dist[v] + pesoAtual;
+					if(distNova < dist[i]){
+						dist[i] = distNova;
 						filaPrioridade.push(make_pair(dist[i], i));
 					}
 				}
