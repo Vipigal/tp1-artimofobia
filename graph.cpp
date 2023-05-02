@@ -90,10 +90,6 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 		}
 	}
 
-	// for(auto i : dist){
-	// 	std::cout<<i<<std::endl;
-	// }
-
 	return (dist[destino] != INF) ? dist[destino] : -1;
 
 }
