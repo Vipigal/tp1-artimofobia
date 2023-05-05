@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]) {
 		G->adicionaAresta(identificadorV1 - 1, identificadorV2 - 1, peso);
 	}
 
-	int menorDistancia = G->dijkstra(0, numeroDeCidades-1);
+	int menorDistancia = G->menorCaminho(0, numeroDeCidades-1);
 	cout<<menorDistancia<<endl;
 
 

@@ -24,7 +24,7 @@ void Grafo::removeAresta(vertice v1, vertice v2){
 }
 
 bool Grafo::existeAresta(vertice v1, vertice v2) const{
-	return _conexao[v1][v2];
+	return _conexao[v1][v2] != -1;
 }
 
 int Grafo::getNumVertices() const{
@@ -92,5 +92,30 @@ int Grafo::dijkstra(vertice origem, vertice destino){
 	}
 
 	return (dist[destino] != INF) ? dist[destino] : -1;
+
+}
+
+//4 
+//0-3
+
+int Grafo::menorCaminho(vertice origem, vertice destino){
+	Grafo* Gaux = new Grafo(2*_numVertices+3);
+	for(int i = 0; i < _numVertices; i++){
+		pair<int, int> i_imparr(i,1);
+		vertice i_impar = (i * 2) + 1;
+		vertice i_par = (i * 2);
+		for(int j = i; j<_numVertices; j++){
+			vertice j_impar = (j * 2) + 1;
+			vertice j_par = (j * 2);
+			if(existeAresta(i,j)){
+				int peso = getPesoAresta(i,j);
+				Gaux->adicionaAresta(i_impar, j_par, peso);
+				Gaux->adicionaAresta(i_par, j_impar, peso);
+			}
+		}
+	}
+
+	int result = Gaux->dijkstra(origem*2, destino*2);
+	return result;
 
 }
